@@ -1,0 +1,98 @@
+<?php if ($isClientLogged || $isAdminLogged): ?>
+
+        <h2>Author Info</h2>
+
+    <?php if (array_key_exists("image_author", $_GET) || array_key_exists("author_id", $_GET)) : ?>
+
+        <table class="listing">
+            <?php if(array_key_exists("message",$_GET)): ?>
+                <p><?= $_GET["message"] ?></p>
+            <?php endif; ?>
+            <!--8 columns-->
+            <thead>
+                <tr>
+                    <th class="col-1">name</th>
+                    <th class="col-1">surname</th>
+                    <th class="col-1">email</th>
+                    <th class="col-1">phone</th>
+                    <th class="col-1">web</th>
+                    <th class="col-1">ig</th>
+                    <th class="col-1">edit</th>
+                    <th class="col-1">delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                 <tr>
+                    <td class="col-1"><?= $author["author_name"] ?></td>
+                    <td class="col-1"><?= $author["author_surname"] ?></td>
+                    <td class="col-1"><a mailto="<?= $author["author_email"] ?>"><?= $author["author_email"] ?></td>
+                    <td class="col-1"><a href="tel=<?= $author["author_phone"] ?>"<?= $author["author_phone"] ?></td>
+                    <td class="col-1"><a href="<?= $author["author_web"] ?>"><?= $author["author_web"] ?></td>
+                    <td class="col-1"><a href="<?= $author["author_ig"] ?>"><?= $author["author_ig"] ?></td>
+
+                    <?php if($isClientLogged || $isAdminLogged) : ?>
+
+                    <td class="col-1"><a href="index.php?action=editAuthor&author_id=<?= $author["author_id"] ?>"><i class="fas fa-edit"></i></a></td>
+
+                        <!-- goes to editAuthor.phtm with author_id-->
+
+                    <td class="col-1"><a href="index.php?action=deleteAuthor&author_id=<?= $author["author_id"] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+
+                    <?php endif; ?>
+                </tr>
+            </tbody>
+
+        </table>
+
+    <?php else: ?>
+    <!-- Image list -->
+            <table class="listing">
+                <thead>
+                    <tr>
+                        <th class="col-1">author id</th>
+                        <th class="col-1">client id</th>
+                        <th class="col-1">name</th>
+                        <th class="col-1">surname</th>
+                        <th class="col-1">email</th>
+                        <th class="col-1">phone</th>
+                        <th class="col-1">web</th>
+                        <th class="col-1">ig</th>
+                        <th class="col-1">edit</th>
+                        <th class="col-1">delete</th>
+
+
+                    </tr>
+                </thead>
+                <!-- code from return $authorsToShow from Author.php -->
+                <tbody>
+                <?php foreach($authorsToShow as $author) : ?>
+
+                    <tr>
+                        <td class="col-1"><?= $author['author_id'] ?></td>
+                        <td class="col-1"><?= $author["client_id"] ?></td>
+                        <td class="col-1"><?= $author["author_name"] ?></td>
+                        <td class="col-1"><?= $author["author_surname"] ?></td>
+                        <td class="col-1"><?= $author["author_email"] ?></td>
+                        <td class="col-1"><?= $author["author_phone"] ?></td>
+                        <td class="col-1"><?= $author["author_web"] ?></td>
+                        <td class="col-1"><?= $author["author_ig"] ?></td>
+
+                        <!--Client can only edit author from its own property - Admin can edit every author-->
+                        <?php if ($author['isFromLoggedClient'] || $isAdminLogged)  :?>
+
+                            <td class="col-1"><a href="index.php?action=editAuthor&author_id=<?= $author["author_id"] ?>"><i class="fas fa-edit"></i></a></td>
+                            <td class="col-1"><a href="index.php?action=deleteAuthor&author_id=<?= $author["author_id"] ?>&client_id=<?= $author["client_id"] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+
+                           <?php endif; ?>
+                    </tr>
+
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+
+    <?php endif; ?>
+
+<?php else : ?>
+    <p>Only available to logged clients</p>
+<?php endif; ?>

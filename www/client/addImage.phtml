@@ -1,0 +1,63 @@
+<?php if ($isClientLogged || $isAdminLogged): ?>
+
+<!--Add Image form-->
+
+<h2>Add Images to your database</h2>
+
+    <form class="input" action="index.php?action=addImage" method="post" enctype="multipart/form-data">
+
+        <label for="image_caption"></label>
+        <textarea name="image_caption"  placeholder="image_caption"></textarea>
+        
+        <label for="image_date"></label>
+        <input type="date" name="image_date" placeholder="image_date"/>
+        
+        <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag1">
+        <label for="image_hashtag1">image_hashtag1</label>
+
+        <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag2" >
+        <label for="image_hashtag2">image_hashtag2</label>
+
+        <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag3">
+        <label for="image_hashtag3">image_hashtag3</label>
+
+        <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag4">
+        <label for="image_hashtag4">image_hashtag4</label>
+
+        <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag5">
+        <label for="image_hashtag5">image_hashtag5</label>
+
+        <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag6">
+        <label for="image_hashtag6">image_hashtag6</label>
+        
+        
+        <!--//  Dropdown Menu to select only authors from that client-->
+        <!--// value inside dropdown menu as parameter to input -->
+        
+        <select class="input" id="image_author" name="image_author">
+              <!--call to dropdown authors in author.php --> 
+            <?php foreach ($image_author as $author) : ?>
+                <option value="<?= $author['author_id'] ?>"> <?= $author['author_name'] ?> </option>
+            <?php endforeach; ?>
+            
+        </select>
+        
+        <label for="image_use"></label>
+        <input type="text" name="image_use" placeholder="image_use"/>
+
+        <label for="image"></label>
+        <input type="file" id="image" name="client_image" onchange="loadPreview()">
+        <img id="preview_client_image">
+
+        <input type="submit" value="addImage">
+        <input type="submit" value="reset">
+
+    </form>
+    
+    <!--Script goes here because is only used by this template-->
+    <script type="text/javascript" src="www/js/dropAuthors.js"></script>
+    <script type="text/javascript" src="www/js/preview.js"></script>
+
+<?php else : ?>
+    <p>Only available to logged clients</p>
+<?php endif; ?>

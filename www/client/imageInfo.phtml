@@ -1,0 +1,32 @@
+<?php if (array_key_exists("image_id", $_GET)) : ?>
+
+    <h2>Image Info</h2>
+    <table class="listing">
+        <thead>
+            <tr>
+                <th class="col-1">name</th>
+                <th class="col-1">caption</th>
+                <th class="col-1">date</th>
+                <th class="col-1">hashtag</th>
+                <th class="col-1">author</th>
+                <th class="col-1">use</th>
+                <th class="col-1">client</th>
+            </tr>
+        </thead>  
+        
+        <tbody>
+            <tr>
+                <td class="col-1"><?= substr($image["image_name"],-8) ?></td> 
+                <td class="col-1"><?= $image["image_caption"] ?></td>
+                <td class="col-1"><?= $image["image_date"] ?></td>
+                <td class="col-1"><?= $image["image_hashtag"] ?></td>
+                <td class="col-1"><?= $image["image_author"] ?></td>
+                <td class="col-1"><?= $image["image_use"] ?></td>
+                <td class="col-1"><?= $image["client_name"] ?></td>
+            </tr>    
+        </tbody>    
+    </table>
+    
+    <div oncontextmenu="return false"><img class="showImage" src="www/images/<?= $image["image_name"] ?>" alt="<?= $image["image_hashtag"] ?>"></a></div>
+    <!-- right click disabled-->
+<?php endif; ?>

@@ -1,0 +1,165 @@
+<?php if ($isClientLogged || $isAdminLogged) : ?>
+
+    <?php if (array_key_exists("image_id", $_GET)) : ?>
+
+    <h2>Edit Images </h2>
+    <form class="input" action="index.php?action=editImage"  method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="image_id" value="<?= $image['image_id'] ?>"/>
+
+        <label for="image_name"></label>
+        <input type="text" placeholder="image_name" name="image_name" value="<?= $image['image_name'] ?>" readonly>
+         <p>image name cannot be changed</p>
+
+        <label for="image_caption"></label>
+        <textarea type= "text" placeholder="image_caption" name="image_caption" id="" cols="50" rows="4"><?= $image["image_caption"] ?> </textarea>
+
+        <label for="date"></label>
+        <input type="date" placeholder="image_date" name="image_date" value="<?= $image['image_date'] ?>">
+
+         <!--checkboxes with with php to get values dynamically -->
+        <?php if($image['image_hashtag'] == "image_hashtag1") : ?>
+        
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag1" checked="checked">
+        <?php else: ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag1">
+        <?php endif; ?>
+        <label for="image_hashtag1">image_hashtag1</label>
+
+        <?php if($image['image_hashtag'] == "image_hashtag2") : ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag2" checked="checked">
+        <?php else: ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag2">
+        <?php endif; ?>
+        <label for="image_hashtag2">image_hashtag2</label>
+
+        <?php if($image['image_hashtag'] == "image_hashtag3") : ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag3" checked="checked">
+        <?php else: ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag3">
+        <?php endif; ?>
+        <label for="image_hashtag3">image_hashtag3</label>
+
+        <?php if($image['image_hashtag'] == "image_hashtag4") : ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag4" checked="checked">
+        <?php else: ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag4">
+        <?php endif; ?>
+        <label for="image_hashtag4">image_hashtag4</label>
+
+        <?php if($image['image_hashtag'] == "image_hashtag5") : ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag5" checked="checked">
+        <?php else: ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag5">
+        <?php endif; ?>
+        <label for="image_hashtag5">image_hashtag5</label>
+
+        <?php if($image['image_hashtag'] == "image_hashtag6") : ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag6" checked="checked">
+        <?php else: ?>
+            <input type="radio" id="myCheck" name="image_hashtag" value="image_hashtag6">
+        <?php endif; ?>
+        <label for="image_hashtag6">image_hashtag6</label>
+
+        <select class="input" id="image_author" name="image_author">
+              <!--call to dropdown authors in author.php -->
+            <?php foreach ($image_author as $author) : ?>
+                <option value="<?= $author['author_id'] ?>"> <?= $author['author_name'] ?> </option>
+
+            <?php endforeach; ?>
+
+
+        </select>
+
+        <input type="text" placeholder="image_use" name="image_use" value="<?= $image['image_use'] ?>">
+
+        <input type="submit" value="add/edit">
+        <input type="submit" value="reset">
+    </form>
+
+<?php else : ?>
+
+    <div>
+        <?php if(array_key_exists("message",$_GET)): ?>
+            <p><?= $_GET["message"] ?></p>
+        <?php endif; ?>
+
+        <h2>Image Info</h2>
+
+        <p><strong>Click the headers to sort each table.</strong></p>
+        <p><strong>Click the image to see the image and its information</strong></p>
+
+        <!-- Image list -->
+        <table class="listing">
+            <thead>
+                <tr>
+                    <th class="col-1">image</th>
+                    <th class="col-1">name</th>
+                    <th class="col-1">caption</th>
+                    <th class="col-1">date</th>
+                    <th class="col-1">hashtag</th>
+                    <th class="col-1">author</th>
+                    <th class="col-1">use</th>
+                    <th class="col-1">edit</th>
+                    <th class="col-1">delete</th>
+                    <th class="col-1">download</th>
+                </tr>
+            </thead>
+                <!-- code from return $edit_image in editImage model from Image.php -->
+
+            <tbody>
+                <?php foreach($imagesToShow as $image) : ?>
+
+                <tr>
+                    <td class="col-1"><a href="index.php?action=imageInfo&image_id=<?= $image["image_id"] ?>"><img src="www/images/<?= $image["image_name"] ?>" alt="<?= $image["image_hashtag"] ?>"></a></td>
+
+                    <td class="col-1"><?= substr($image["image_name"],-8); ?></td>
+                    <td class="col-1"><?= $image["image_caption"] ?></td>
+                    <td class="col-1"><?= $image["image_date"] ?></td>
+                    <td class="col-1"><?= $image["image_hashtag"] ?></td>
+
+                    <td class="col-1"><?= $image["image_author"] ?></td>
+
+                    <td class="col-1"><?= $image["image_use"] ?></td>
+
+                    <!--client has to be logged to edit its own pictures so I need to check if client id with the client logged === -->
+
+                    <?php if ($image['isFromLoggedClient'] || $isAdminLogged)  :?>
+
+                            <td class="col-1"><a href="index.php?action=editImage&image_id=<?= $image["image_id"] ?>&client_id=<?= $image["client_id"] ?>"><i class="fas fa-edit"></i></a></td>
+                            <td class="col-1"><a href="index.php?action=deleteImage&image_id=<?= $image["image_id"] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td class="col-1"><input data-name="<?= $image["image_name"] ?>" type="checkbox" name="download" value="yes" />
+
+                            <input data-id="<?= $image["image_id"] ?>" type="hidden" name="download"/>
+
+                    <?php endif; ?>
+                </tr>
+
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <!--Form ImageController line 215 -->
+
+        <?php if ($currentPage !== 0) : ?>
+            <a href="index.php?action=editImage&current_page=<?= $currentPage - 1?>">previous</a>
+        <?php endif; ?>
+
+        <?php if (isset($needShowNextButton) && $needShowNextButton): ?>
+            <a href="index.php?action=editImage&current_page=<?= $currentPage + 1?>">next</a>
+        <?php endif; ?>
+        <br>
+
+        <!-- when boutton clicked, Ajax is called in the request-->
+        <button id="download"> download </i></button>
+
+        <?php endif; ?>
+    </div>
+        <!--Cripts are outside conditions. They are called invariantly from IF or ELSE -->
+        <script type="text/javascript" src="www/js/dropAuthors.js"></script>
+        <script type="text/javascript" src="www/js/showImage.js"></script>
+        <script type="text/javascript" src="www/js/sortTable.js"></script>
+
+<?php else : ?>
+    <p>Only available to logged clients</p>
+<?php endif; ?>

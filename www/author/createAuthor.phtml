@@ -1,0 +1,26 @@
+<?php if ($isClientLogged || $isAdminLogged) :?>
+
+<!--CreateAuthor form-->
+<h2> CreateAuthor</h2>
+
+     <form class="input" action="index.php?action=createAuthor"  method="post">
+        
+        <label for="author_name"></label>
+            <input type="text" placeholder="author_name" name="author_name">
+        <label for="author_surname"></label>
+            <input type="text" placeholder="author_surname" name="author_surname">
+        <label for="author_email"></label>
+            <input type="email" placeholder="author_email" name="author_email">
+        <label for="author_phone"></label>
+            <input type="number" placeholder="author_phone" name="author_phone">
+        <label for="author_phone"></label>
+            <input type="text" placeholder="author_web" name="author_web">
+        <label for="author_ig"></label>
+            <input type="text" placeholder="author_ig" name="author_ig">
+            
+        <input type="submit" value="createAuthor">
+    </form>
+    
+<?php else : ?>
+    <p>Only available to logged clients</p>
+<?php endif; ?>

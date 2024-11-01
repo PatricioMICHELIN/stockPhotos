@@ -1,0 +1,36 @@
+<p>Click hashtag button to see images by hashtag</p>
+    <div class="mix-container">
+        <div class="mix-button">
+            <button type="button" data-filter="all">All</button>
+            <button type="button" data-filter=".image_hashtag1">image_hashtag1</button>
+            <button type="button" data-filter=".image_hashtag2">image_hashtag2</button>
+            <button type="button" data-filter=".image_hashtag3">image_hashtag3</button>
+            <button type="button" data-filter=".image_hashtag4">image_hashtag4</button>
+            <button type="button" data-filter=".image_hashtag5">image_hashtag5</button>
+            <button type="button" data-filter=".image_hashtag6">image_hashtag6</button>
+        </div>
+
+        <p>Hover images to see info</p>
+        <p>Click over the images to see same kind of images</p>
+
+        <table class="mix-content">
+            <tbody>
+                <!-- get info from image.php function getImages() -->
+                <?php foreach($images as $image) : ?>
+                
+                <!--inline CSS in td because is the fastest way to read it. I cannot insert readable PHP in a css file. -->
+                
+                    <tr class="mix <?=$image["image_hashtag"] ?>" data-order="n">
+                        <td oncontextmenu="return false" onclick="myFunction()" data-filter=".<?=$image["image_hashtag"] ?>" class="front slider" style="background-image: url('www/images/<?=$image["image_name"] ?>')" >
+
+                          <span><?=$image["image_caption"] ?></span>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+
+

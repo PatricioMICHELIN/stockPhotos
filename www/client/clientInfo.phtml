@@ -1,0 +1,39 @@
+<?php if ($isAdminLogged): ?>
+
+<!--Client Info ONLY if Admin logged-->
+        <h2>Client Info</h2>
+             <table class="listing">
+                <thead>
+                    <tr>
+                        <th class="col-1">client_id</th>
+                        <th class="col-1">client_name</th>
+                        <th class="col-1">client_surname</th>
+                        <th class="col-1">client_email</th>
+                        <th class="col-1">client_password</th>
+                        <th class="col-1">client_phone</th>
+                        <th class="col-1">edit</th>
+                        <th class="col-1">delete</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php foreach($clients as $client) : ?>
+                        <tr>
+                            <td class="col-1"><?= $client["client_id"] ?></td>
+                            <td class="col-1"><?= $client["client_name"] ?></td>
+                            <td class="col-1"><?= $client["client_surname"] ?></td>
+                            <td class="col-1"><?= $client["client_email"] ?></td>
+                            <td class="col-1"><?= substr($client["client_password"], 0, 10) ?></td>
+                            <td class="col-1"><?= $client["client_phone"] ?></td>
+    
+                            <td class="col-1"><a href="index.php?action=editClient&client_email=<?= $client["client_email"] ?>"><i class="fas fa-edit"></i></a></td>
+    
+                            <td class="col-1"><a href="index.php?action=deleteClient&client_email=<?= $client["client_email"] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+    <?php endif; ?>
+
+

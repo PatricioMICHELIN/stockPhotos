@@ -1,0 +1,75 @@
+<?php if ($isAdminLogged) : ?>
+        <!--when clicked in edit button in ClientInfo, Admin arrives here to edit-->
+    <?php if (array_key_exists("client_email", $_GET)) : ?>
+
+        <h2>Edit Client </h2>
+    
+        <form class="input" action="index.php?action=editClient"  method="post">
+     
+                <input type="hidden" name="client_id" value="<?= $client['client_id'] ?>"/>
+     
+            <label for="client_name"></label>
+                <input type="text" placeholder="client_name" name="client_name" value="<?= $client['client_name'] ?>">
+            <label for="client_surname"></label> 
+                <input type="text" placeholder="client_surname" name="client_surname" value="<?= $client['client_surname'] ?>">
+            <label for="client_email"></label> 
+                <input type="email" placeholder="client_email" name="client_email" value="<?= $client['client_email'] ?>">
+            <label for="client_phone"></label>
+                <input type="number" placeholder="client_phone" name="client_phone" value="<?= $client['client_phone'] ?>">
+            <label for="password"></label>
+                <input type="password" placeholder="client_password" name="client_password" value="<?= $client['client_password'] ?>">           
+            <input type="submit" value="add/edit">
+            <input type="submit" value="reset">
+            
+        </form>
+
+    <?php endif ; ?>
+    
+    <!--???? Je crois que j'ai oublié le php else à partir de cette ligne-->
+    
+    
+        <!--<div>-->
+        <!--    <?php if(array_key_exists("message",$_GET)): ?>-->
+        <!--        <p><?= $_GET["message"] ?></p>-->
+        <!--    <?php endif; ?>-->
+            
+        <!--     <h2>Client Info</h2>-->
+    
+            <!-- Client list -->
+        
+        <!--    <table class="listing">-->
+        <!--            <thead>-->
+        <!--                <tr>-->
+        <!--                    <th class="col-1">id</th>-->
+        <!--                    <th class="col-1">name</th>-->
+        <!--                    <th class="col-1">surname</th>-->
+        <!--                    <th class="col-1">email</th>-->
+        <!--                    <th class="col-1">password</th>-->
+        <!--                    <th class="col-1">phone</th>-->
+                            
+        <!--                    <th class="col-1">edit</th>-->
+        <!--                    <th class="col-1">delete</th>-->
+                            
+        <!--                </tr>-->
+        <!--            </thead>-->
+                    <!-- code from return $edit_client in editClient model from Client.php -->
+        <!--            <tbody>-->
+        <!--                <?php foreach($clients as $client) : ?>-->
+                            
+        <!--                    <td class="col-1"><?= $client["client_id"] ?></td>-->
+        <!--                    <td class="col-1"><?= $client["client_name"] ?></td>-->
+        <!--                    <td class="col-1"><?= $client["client_surname"] ?></td>-->
+        <!--                    <td class="col-1"><?= $client["client_email"] ?></td>-->
+                            
+        <!--                    <td class="col-1"><?= $client["client_password"] ?></td>-->
+        <!--                    <td class="col-1"><?= $client["client_phone"] ?></td>-->
+                            
+        <!--                    <td class="col-1"><a href="index.php?action=editClient&client_id=<?= $client["client_id"] ?>"><i class="fas fa-edit"></i></a></td>-->
+        <!--                    <td class="col-1"><a href="index.php?action=deleteClient&client_id=<?= $client["client_id"] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
+        <!--                <?php endforeach; ?>-->
+        <!--            </tbody>-->
+        <!--    </table>    -->
+
+<?php else : ?>
+    <p>Only available to logged admins</p>
+<?php endif; ?>

@@ -1,0 +1,125 @@
+======CLIENT======
+
+HOME — ...........OK
+
+CREATE CLIENT - ...........OK
+LOGIN CLIENT - ...........OK
+
+CREATE AUTHOR - ...........OK
+EDIT AUTHOR - ...........OK
+DELETE AUTHOR - ...........ok
+
+IMAGE UPLOADED - ...........ok
+EDIT IMAGE - ...........ok
+IMAGE INFO - ...........ok
+DELETE IMAGE - ...........ok 
+DOWNLOAD IMAGE - ...........ok
+
+LOGOUT - ...........ok
+
+====ADMIN=====
+
+HOME — ...........ok
+
+EDIT IMAGE - ...........ok
+IMAGE INFO.............. OK
+DELETE IMAGE - ...........ok 
+
+EDIT AUTHOR - ...........ok
+DELETE AUTHOR - ........... OK
+
+EDIT CLIENT - ...........ok
+DELETE CLIENT - ...........OK
+
+DOWNLOAD IMAGE -  ...........OK
+
+========
+
+ADMIN = 1 
+
+patoAdmin
+admin@pato.com
+123
+
+========
+
+CLIENTS = 3
+
+ONE
+clientONE
+client1@pato.com
+123
+123
+
+TWO
+clientTWO
+client2@pato.com
+123
+123
+
+THREE
+clientTHREE
+client3@pato.com
+123
+123
+
+
+=========
+
+AUTHORS = 5
+
+pete
+sampras
+pete@sampras.com
+123
+www.pete.com
+@sampras
+
+andre
+agassi 
+andre@agassi.com
+123
+www.andre.com
+@andre
+
+stefan
+edberg
+stefan@edberg.com
+123
+www.stefan.com
+@stefan 
+
+patrick
+rafter
+patrick@rafter.com
+123
+www.patrick.com
+@patrick  
+
+roger
+federer
+roger@federer.com
+123
+www.roger.com
+@roger
+
+rafa
+nadal
+rafa@nadal.com
+123 
+www.rafa.com
+@rafa
+
+============
+
+IMAGES > 25
+
+CAPTION: 
+e and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into 
+electronic typesetting, remaining e
+
+USE:
+news
+editorial 
+magazine
+sport

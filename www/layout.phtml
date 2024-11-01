@@ -1,0 +1,123 @@
+<?php $ClientController = new ClientController(); ?>
+<?php $AdminController = new AdminController(); ?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title><?= $title ?></title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="www/css/normalize.css" type="text/css" />
+	<link rel="stylesheet" href="www/css/style.css" type="text/css" />
+
+    <!-- FavIcon GENERATOR https://favicon.io/favicon-converter/ -->
+    <link rel="icon" type="image/png" href="www/images/favicon-32x32.png">
+	<link rel="shortcut icon" href="#">
+
+	<!-- cnd used in MixItUp -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js" rel="stylesheet">
+    
+    <!-- script of jquery library via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+    <header class="header container">
+        <div>
+            <img src="www/images/PMlogo-300x300.jpg" alt="logo">
+            <h1>Pato Image Search Engine </h1>
+        </div>
+
+        <div>
+            <nav>
+            <!-- if client and admin not connected-->
+            <?php if (!$ClientController -> isClientLogged() && !$AdminController -> isAdminLogged() ) : ?>
+            
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="index.php?action=createClient" name="createClient">createClient</a></li>
+                    <li><a href="index.php?action=loginClient" name="loginClient">loginClient</a></li>
+
+                <!-- if client OR admin are connected-->
+            <?php else : ?>
+                
+            <?php if ($ClientController -> isClientLogged() ) : ?>   
+                
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="index.php?action=addImage" name="addImage">Add Image</a></li>
+                    <li><a href="index.php?action=editImage&current_page=0" name="editImage"> Browse & Edit Images</a></li>
+                    <li><a href="index.php?action=createAuthor" name="createAuthor">Create Author</a></li>
+                    <li><a href="index.php?action=authorInfo" name="authorInfo">Browse & Edit Authors</a></li>
+                    
+            <?php endif; ?> 
+            
+            <?php if ($AdminController -> isAdminLogged() ) : ?>
+            
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php?action=editImage&current_page=0" name="editImage"> Browse & Edit Images</a></li>
+                <li><a href="index.php?action=authorInfo" name="authorInfo">Browse & Edit Authors</a></li>
+               
+                <li><a href="index.php?action=clientInfo" name="clientInfo">Browse & Edit Clients</a></li>
+            <?php endif; ?>   
+                 
+                <li><a href="index.php?action=logout" name="logout">Logout</a></li>
+                
+                <?php if ($ClientController -> isClientLogged()) : ?>
+                    <h3>Welcome * <?= $_SESSION["client"]["client_name"]; ?> * Enjoy your search</h3>
+                <?php endif; ?>
+                
+                <?php if ($AdminController -> isAdminLogged()) : ?>
+                    <h3>Welcome * <?= $_SESSION["adminSession"] ; ?> * as Admin</h3>
+                <?php endif; ?>
+                
+            <?php endif; ?>
+            </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main container">
+        <?php if(isset($message)) : ?>
+    		<p> <?= $message ?> </p>
+    	<?php endif; ?>
+
+    	<?php if(array_key_exists("message",$_GET)) : ?>
+    		<p> <?= $_GET["message"] ?> </p>
+    	<?php endif; ?>
+
+        <?php include $template.".phtml"; ?>
+    </main>
+
+    <footer>
+        <div class="footer container">
+            <h3>Our social networks</h3>
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram-square"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fa-solid fa-phone"></i></a>
+                <a href="mailto:"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+    </footer>
+
+	<!-- https://cdnjs.com/libraries/mixitup -->
+	<!-- https://www.kunkalabs.com/mixitup/docs/get-started/ -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js" integrity="sha512-fuxK9KrfYYxsXOm+VTYLEX3vOKymX2CDP+X1q0vsTwe9LPyJBSC3LXPu79ZNZiNCFrSzzMklmp5bU9Da/1TQEw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- mixitup.js en local -->
+    <script type="text/javascript" src="www/js/mixitup.js"></script>
+    <!-- J'appel le script pour lancer la tache mixitup. -->
+    <script type="text/javascript" src="www/js/script.js"></script>
+    
+    
+</body>
+</html>
